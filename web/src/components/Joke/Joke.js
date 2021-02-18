@@ -37,13 +37,13 @@ const Joke = ({ joke }) => {
 
   return (
     <>
-      <div className="my-20">
-        <div className="text-xl">{joke.setUp}</div>
-        <div className="text-xl text-right italic">{joke.punchLine}</div>
+      <div className="my-5 bg-gray-900 bg-opacity-95 p-10 rounded shadow-2xl">
+        <p className="text-xl">{joke.setUp}</p>
+        <p className="text-xl text-right italic opacity-75 mt-2">
+          {joke.punchLine}
+        </p>
 
-        <div>{joke.name}</div>
-
-        <div className="actions text-center">
+        <div className="actions mt-5 text-center">
           <button className="mr-5" onClick={handleUpVote}>
             <svg
               className="w-10 inline-block"

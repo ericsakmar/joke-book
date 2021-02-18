@@ -3,7 +3,7 @@ import { Flash } from '@redwoodjs/web'
 
 const JokesLayout = (props) => {
   return (
-    <div className="max-w-sm m-auto">
+    <div className="max-w-sm mx-auto my-5 ">
       <Flash timeout={1000} />
 
       <header className="rw-header">
