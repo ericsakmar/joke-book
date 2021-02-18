@@ -1,6 +1,7 @@
 [build]
-  publish = "web/dist"
-  functions = "api/dist/functions"
+command = "yarn rw deploy netlify"
+publish = "web/dist"
+functions = "api/dist/functions"
 
 [dev]
   command = "yarn rw dev"
