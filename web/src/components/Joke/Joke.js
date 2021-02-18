@@ -1,107 +1,92 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 
-import { QUERY } from 'src/components/JokesCell'
-
-const DELETE_JOKE_MUTATION = gql`
-  mutation DeleteJokeMutation($id: Int!) {
-    deleteJoke(id: $id) {
+const UPDATE_JOKE_MUTATION = gql`
+  mutation UpdateJokeMutation($id: Int!, $input: UpdateJokeInput!) {
+    updateJoke(id: $id, input: $input) {
       id
+      createdAt
+      setUp
+      punchLine
+      name
+      upVotes
+      downVotes
     }
   }
 `
 
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
-
-const timeTag = (datetime) => {
-  return (
-    <time dateTime={datetime} title={datetime}>
-      {new Date(datetime).toUTCString()}
-    </time>
-  )
-}
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
-
 const Joke = ({ joke }) => {
-  const { addMessage } = useFlash()
-  const [deleteJoke] = useMutation(DELETE_JOKE_MUTATION, {
+  const [updateJoke] = useMutation(UPDATE_JOKE_MUTATION, {
     onCompleted: () => {
-      navigate(routes.jokes())
-      addMessage('Joke deleted.', { classes: 'rw-flash-success' })
+      // navigate(routes.jokes())
+      // addMessage('Joke deleted.', { classes: 'rw-flash-success' })
     },
   })
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete joke ' + id + '?')) {
-      deleteJoke({ variables: { id } })
-    }
+  const handleUpVote = () => {
+    const next = { upVotes: joke.upVotes + 1 }
+    updateJoke({ variables: { id: joke.id, input: next } })
   }
+
+  const handleDownVote = () => {
+    const next = { downVotes: joke.downVotes + 1 }
+    updateJoke({ variables: { id: joke.id, input: next } })
+  }
+
+  const showAdmin = true
 
   return (
     <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            Joke {joke.id} Detail
-          </h2>
-        </header>
-        <table className="rw-table">
-          <tbody>
-            <tr>
-              <th>Id</th>
-              <td>{joke.id}</td>
-            </tr>
-            <tr>
-              <th>Created at</th>
-              <td>{timeTag(joke.createdAt)}</td>
-            </tr>
-            <tr>
-              <th>Set up</th>
-              <td>{joke.setUp}</td>
-            </tr>
-            <tr>
-              <th>Punch line</th>
-              <td>{joke.punchLine}</td>
-            </tr>
-            <tr>
-              <th>Name</th>
-              <td>{joke.name}</td>
-            </tr>
-            <tr>
-              <th>Up votes</th>
-              <td>{joke.upVotes}</td>
-            </tr>
-            <tr>
-              <th>Down votes</th>
-              <td>{joke.downVotes}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="max-w-sm">
+        <div className="text-xl">{joke.setUp}</div>
+        <div className="text-xl text-right italic">{joke.punchLine}</div>
+
+        <div>{joke.name}</div>
+
+        <div className="actions text-center">
+          <button className="mr-5" onClick={handleUpVote}>
+            <svg
+              className="w-10 inline-block"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+              />
+            </svg>
+            ({joke.upVotes})
+          </button>
+
+          <button className="mr-5" onClick={handleDownVote}>
+            <svg
+              className="w-10 inline-block"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"
+              />
+            </svg>
+            ({joke.downVotes})
+          </button>
+
+          {showAdmin && (
+            <Link to={routes.editJoke({ id: joke.id })} className="">
+              Edit
+            </Link>
+          )}
+        </div>
       </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editJoke({ id: joke.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <a
-          href="#"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(joke.id)}
-        >
-          Delete
-        </a>
-      </nav>
     </>
   )
 }
