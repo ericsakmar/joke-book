@@ -25,10 +25,10 @@ const JokeForm = (props) => {
 
         <Label
           name="setUp"
-          className="rw-label"
+          className="rw-label text-white"
           errorClassName="rw-label rw-label-error"
         >
-          Set up
+          Set up:
         </Label>
         <TextField
           name="setUp"
@@ -41,10 +41,10 @@ const JokeForm = (props) => {
 
         <Label
           name="punchLine"
-          className="rw-label"
+          className="rw-label text-white"
           errorClassName="rw-label rw-label-error"
         >
-          Punch line
+          Punch line:
         </Label>
         <TextField
           name="punchLine"
@@ -57,10 +57,10 @@ const JokeForm = (props) => {
 
         <Label
           name="name"
-          className="rw-label"
+          className="rw-label text-white"
           errorClassName="rw-label rw-label-error"
         >
-          Name
+          Your name:
         </Label>
         <TextField
           name="name"
@@ -71,41 +71,12 @@ const JokeForm = (props) => {
         />
         <FieldError name="name" className="rw-field-error" />
 
-        <Label
-          name="upVotes"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Up votes
-        </Label>
-        <NumberField
-          name="upVotes"
-          defaultValue={props.joke?.upVotes}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="upVotes" className="rw-field-error" />
-
-        <Label
-          name="downVotes"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Down votes
-        </Label>
-        <NumberField
-          name="downVotes"
-          defaultValue={props.joke?.downVotes}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="downVotes" className="rw-field-error" />
-
-        <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
-            Save
+        <div className="">
+          <Submit
+            disabled={props.loading}
+            className="block bg-green-300 rounded text-gray-900 text-center font-bold py-2 shadow-2xl mt-5 w-full"
+          >
+            Add it!
           </Submit>
         </div>
       </Form>

@@ -22,17 +22,12 @@ const NewJoke = () => {
   })
 
   const onSave = (input) => {
-    createJoke({ variables: { input } })
+    createJoke({ variables: { input: { ...input, upVotes: 0, downVotes: 0 } } })
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Joke</h2>
-      </header>
-      <div className="rw-segment-main">
-        <JokeForm onSave={onSave} loading={loading} error={error} />
-      </div>
+    <div className="my-5 bg-gray-900 bg-opacity-95 p-10 rounded shadow-2xl">
+      <JokeForm onSave={onSave} loading={loading} error={error} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/JokesCell'
 import Joke from '../Joke/Joke'
@@ -26,6 +27,13 @@ const JokesList = ({ jokes }) => {
 
   return (
     <div className="">
+      <Link
+        to={routes.newJoke()}
+        className="block bg-green-300 rounded text-gray-900 text-center font-bold py-2 shadow-2xl mt-5"
+      >
+        Add a joke!
+      </Link>
+
       {jokes.map((joke) => (
         <Joke key={joke.id} joke={joke} />
       ))}

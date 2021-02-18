@@ -1,4 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
 import { Flash } from '@redwoodjs/web'
 
 const JokesLayout = (props) => {
@@ -12,13 +11,6 @@ const JokesLayout = (props) => {
         <p className="opacity-80 text-lg text-center">
           Add some jokes and vote on your favorites!
         </p>
-
-        <Link
-          to={routes.newJoke()}
-          className="block bg-green-300 rounded text-gray-900 text-center font-bold py-2 shadow-2xl mt-5"
-        >
-          Add a joke!
-        </Link>
       </header>
 
       <main className="">{props.children}</main>
