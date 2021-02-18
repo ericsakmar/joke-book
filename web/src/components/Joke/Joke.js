@@ -1,5 +1,5 @@
 import { useMutation } from '@redwoodjs/web'
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, useParams } from '@redwoodjs/router'
 
 const UPDATE_JOKE_MUTATION = gql`
   mutation UpdateJokeMutation($id: Int!, $input: UpdateJokeInput!) {
@@ -23,6 +23,8 @@ const Joke = ({ joke }) => {
     },
   })
 
+  const { admin } = useParams()
+
   const handleUpVote = () => {
     const next = { upVotes: joke.upVotes + 1 }
     updateJoke({ variables: { id: joke.id, input: next } })
@@ -33,7 +35,7 @@ const Joke = ({ joke }) => {
     updateJoke({ variables: { id: joke.id, input: next } })
   }
 
-  const showAdmin = false
+  const showAdmin = admin === 'true'
 
   return (
     <>
