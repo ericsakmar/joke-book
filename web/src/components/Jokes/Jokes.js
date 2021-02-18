@@ -34,9 +34,12 @@ const JokesList = ({ jokes }) => {
         Add a joke!
       </Link>
 
-      {jokes.map((joke) => (
-        <Joke key={joke.id} joke={joke} />
-      ))}
+      {jokes
+        .slice()
+        .sort((a, b) => b.upVotes - b.downVotes - (a.upVotes - a.downVotes))
+        .map((joke) => (
+          <Joke key={joke.id} joke={joke} />
+        ))}
     </div>
   )
 }
