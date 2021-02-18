@@ -3,19 +3,22 @@ import { Flash } from '@redwoodjs/web'
 
 const JokesLayout = (props) => {
   return (
-    <div className="rw-scaffold">
+    <div className="max-w-sm m-auto">
       <Flash timeout={1000} />
+
       <header className="rw-header">
         <h1 className="rw-heading rw-heading-primary">
           <Link to={routes.jokes()} className="rw-link">
             Jokes
           </Link>
         </h1>
+
         <Link to={routes.newJoke()} className="rw-button rw-button-green">
           <div className="rw-button-icon">+</div> New Joke
         </Link>
       </header>
-      <main className="rw-main">{props.children}</main>
+
+      <main className="">{props.children}</main>
     </div>
   )
 }

@@ -37,7 +37,7 @@ const Joke = ({ joke }) => {
 
   return (
     <>
-      <div className="max-w-sm">
+      <div className="my-20">
         <div className="text-xl">{joke.setUp}</div>
         <div className="text-xl text-right italic">{joke.punchLine}</div>
 
