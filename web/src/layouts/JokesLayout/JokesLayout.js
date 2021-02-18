@@ -6,15 +6,18 @@ const JokesLayout = (props) => {
     <div className="max-w-sm mx-auto my-5 ">
       <Flash timeout={1000} />
 
-      <header className="rw-header">
-        <h1 className="rw-heading rw-heading-primary">
-          <Link to={routes.jokes()} className="rw-link">
-            Jokes
-          </Link>
-        </h1>
+      <header className="">
+        <h1 className="text-5xl text-center">joke wall</h1>
 
-        <Link to={routes.newJoke()} className="rw-button rw-button-green">
-          <div className="rw-button-icon">+</div> New Joke
+        <p className="opacity-80 text-lg text-center">
+          Add some jokes and vote on your favorites!
+        </p>
+
+        <Link
+          to={routes.newJoke()}
+          className="block bg-green-300 rounded text-gray-900 text-center font-bold py-2 shadow-2xl mt-5"
+        >
+          Add a joke!
         </Link>
       </header>
 

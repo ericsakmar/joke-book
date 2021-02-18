@@ -33,7 +33,7 @@ const Joke = ({ joke }) => {
     updateJoke({ variables: { id: joke.id, input: next } })
   }
 
-  const showAdmin = true
+  const showAdmin = false
 
   return (
     <>
@@ -42,9 +42,10 @@ const Joke = ({ joke }) => {
         <p className="text-xl text-right italic opacity-75 mt-2">
           {joke.punchLine}
         </p>
+        <p className="text-xs text-blue-300">by {joke.name}</p>
 
         <div className="actions mt-5 text-center">
-          <button className="mr-5" onClick={handleUpVote}>
+          <button className="mr-5 hover:text-green-300" onClick={handleUpVote}>
             <svg
               className="w-10 inline-block"
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +63,7 @@ const Joke = ({ joke }) => {
             ({joke.upVotes})
           </button>
 
-          <button className="mr-5" onClick={handleDownVote}>
+          <button className="mr-5 hover:text-red-300" onClick={handleDownVote}>
             <svg
               className="w-10 inline-block"
               xmlns="http://www.w3.org/2000/svg"
